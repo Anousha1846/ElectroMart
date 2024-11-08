@@ -2,32 +2,261 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* Navbar Start */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: gray;
+  color: #fff;
+  position: relative;
+  z-index: 10; }
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: Cursive;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  transition: transform 0.3s ease;
+  padding: 0 100px;
+}
+
+.menu li {
+  margin-left: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+  font-family: serif;
+}
+
+.menu li:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+/* Toggle label for mobile */
+.toggle-label {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer; 
+  z-index: 11;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menu {
+    display: none; /* Hide menu by default on mobile */
+    flex-direction: column;
+    background-color: #333;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    padding: 1rem 0;
+    z-index: 9; /* Keep menu below the toggle button */
+  }
+
+  /* Show menu when it's active (when the state `isOpen` is true) */
+  .menu.active {
+    display: flex;
+  }
+
+  .toggle-label {
+    display: block;
+  }
+
+  .menu li {
+    margin: 1rem 0;
+    text-align: center;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+/* Navbar end */
+
+
+/* carausel start */
+/* Carousel container takes full height and width */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 579px; /* Full viewport height */
+  overflow: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Slide container to enable horizontal sliding */
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+/* Each slide fills the full viewport */
+.slide {
+  position: relative; /* Needed for Next.js Image layout="fill" */
+  min-width: 100%; /* Full width of viewport */
+  height: 100%; /* Full height of viewport */
+}
+
+/* Navigation button styles */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* Button hover effect */
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+/* carausel end */
+
+/* about start */
+.about-main {
+  display: grid;
+  grid-template-columns: 3% 94% 3%;
+  height: 100%;
+  width: 100%;
+  background-color: #f1f5f9.; 
+  padding: 2.5rem 0; 
+}
+
+@media (min-width: 1024px) {
+  .about-main {
+    grid-template-columns: 10% 80% 10%; 
+    padding-top: 5rem;
   }
 }
+
+/* Content Layout */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to a single column */
+  border-radius: 1rem; /* rounded-xl */
+}
+
+@media (min-width: 1024px) {
+  .about-content {
+    grid-template-columns: 40% 60%; /* lg:grid-cols-[40%_60%] */
+  }
+}
+
+.image-container {
+  padding-inline: 2rem; 
+}
+
+.about-image {
+  padding: 0.5rem;  
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 640px) {
+  .about-image {
+    height: 500px;
+    width:100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .about-image {
+    height: 380px; 
+    width:100%;
+  }
+}
+
+
+@media (min-width: 900px) {
+  .about-image {
+    height: 430px; 
+    width:100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-image {
+    height: 400px; 
+    width:100%;
+  }
+}
+
+
+
+/* Text and Details Section */
+.about-details {
+  padding: 1.5rem 2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-title {
+  font-size: 2.5rem; /* text-3xl */
+  font-weight: bolder;
+  color: gray; /* text-sky-700 */
+  animation: pulse 1s infinite;
+  font-family:Cursive;
+}
+
+.about-description {
+  font-size: 1.125rem; /* md:text-lg */
+  color: #4a5568; /* text-gray-700 */
+  line-height: 1.6;
+}
+
+
+@keyframes pulse {
+  0% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.75;
+  }
+}
+/* about end */
+
+
+/* footer start */
+footer {width: 100%;       
+  min-height: 80px;
+  background-color: #333333;  
+  text-align: center;  
+  padding: 1rem;       
+  color: white;}
+/* footer end */
